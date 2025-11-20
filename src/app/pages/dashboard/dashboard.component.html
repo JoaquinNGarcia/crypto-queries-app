@@ -1,0 +1,129 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h1>Crypto market overview</h1>
+      <p>Datos en tiempo real usando CoinGecko Public API.</p>
+    </div>
+  </header>
+
+  @if (global; as g) {
+    <section class="cards-grid">
+      <article class="card big">
+        <h2>Capitalización total</h2>
+        <p class="value">
+          {{ g.total_market_cap?.[vsCurrency] | number: '1.0-0' }}
+          <span class="currency">{{ vsCurrency | uppercase }}</span>
+        </p>
+        <p class="muted">
+          Volumen 24h:
+          {{ g.total_volume?.[vsCurrency] | number: '1.0-0' }}
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Variación 24h</h3>
+        <p
+          class="chip"
+          [ngClass]="{
+            positive: g.market_cap_change_percentage_24h_usd >= 0,
+            negative: g.market_cap_change_percentage_24h_usd < 0
+          }"
+        >
+          {{ g.market_cap_change_percentage_24h_usd | number: '1.2-2' }}%
+        </p>
+        <p class="muted">
+          Criptos activas: {{ g.active_cryptocurrencies | number }}
+        </p>
+        <p class="muted">
+          Mercados: {{ g.markets | number }}
+        </p>
+      </article>
+    </section>
+  } @else if (!loading && !error) {
+    <p class="state-message">
+      No pudimos obtener los datos globales. Intentá nuevamente.
+    </p>
+  }
+
+  <section class="toolbar">
+    <div class="toolbar-left">
+      <label>
+        Moneda:
+        <select [(ngModel)]="vsCurrency" (change)="onCurrencyChange()">
+          <option value="usd">USD</option>
+          <option value="eur">EUR</option>
+          <option value="ars">ARS</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="toolbar-right">
+      <input
+        type="text"
+        placeholder="Buscar por nombre o símbolo..."
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+  </section>
+
+  @if (filteredMarkets.length) {
+    <section class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Moneda</th>
+            <th>Precio</th>
+            <th>Market Cap</th>
+            <th>Volumen 24h</th>
+            <th>24h %</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (coin of filteredMarkets; track coin.id; let i = $index) {
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td class="coin-cell">
+                <img [src]="coin.image" [alt]="coin.name" />
+                <div>
+                  <span class="coin-name">{{ coin.name }} </span>
+                  <span class=" coin-symbol">{{ coin.symbol | uppercase }}</span>
+                </div>
+              </td>
+              <td>
+                {{ coin.current_price | number: '1.2-2' }}
+                {{ vsCurrency | uppercase }}
+              </td>
+              <td>{{ coin.market_cap | number: '1.0-0' }}</td>
+              <td>{{ coin.total_volume | number: '1.0-0' }}</td>
+              <td
+                [ngClass]="{
+                  positive: coin.price_change_percentage_24h >= 0,
+                  negative: coin.price_change_percentage_24h < 0
+                }"
+              >
+                {{ coin.price_change_percentage_24h | number: '1.2-2' }}%
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  }
+
+  @if (!loading && !filteredMarkets.length && !error) {
+    <p class="state-message">
+      No se encontraron criptomonedas con ese filtro.
+    </p>
+  }
+
+  @if (loading) {
+    <p class="state-message">Cargando datos...</p>
+  }
+
+  @if (error) {
+    <p class="state-message error">
+      {{ error }}
+    </p>
+  }
+</section>

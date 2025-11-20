@@ -1,0 +1,83 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h1>Trending coins</h1>
+      <p>Criptomonedas más buscadas en las últimas 24 horas.</p>
+    </div>
+
+    <div class="toolbar-right">
+      <label>
+        Moneda:
+        <select [(ngModel)]="vsCurrency" (change)="onCurrencyChange()">
+          <option value="usd">USD</option>
+          <option value="eur">EUR</option>
+          <option value="ars">ARS</option>
+        </select>
+      </label>
+      <button class="ghost-btn" type="button" (click)="refresh()" [disabled]="loading">
+        Actualizar
+      </button>
+    </div>
+  </header>
+
+  @if (trendingCoins.length) {
+    <section class="cards-grid">
+      @for (coin of trendingCoins; track coin.id) {
+        <article class="trend-card">
+          <header>
+            <div class="coin-info">
+              <img [src]="coin.image" [alt]="coin.name" />
+              <div>
+                <h2>{{ coin.name }}</h2>
+                <span>{{ coin.symbol | uppercase }}</span>
+              </div>
+            </div>
+            <span class="rank">#{{ coin.market_cap_rank }}</span>
+          </header>
+
+          <div class="price-row">
+            <span class="label">Precio</span>
+            <span class="value">
+              {{ coin.current_price | number: '1.2-2' }}
+              {{ vsCurrency | uppercase }}
+            </span>
+          </div>
+
+          <div class="price-row">
+            <span class="label">Market Cap</span>
+            <span class="value">
+              {{ coin.market_cap | number: '1.0-0' }}
+            </span>
+          </div>
+
+          <div class="price-row">
+            <span class="label">24h %</span>
+            <span
+              class="value"
+              [ngClass]="{
+                positive: coin.price_change_percentage_24h >= 0,
+                negative: coin.price_change_percentage_24h < 0
+              }"
+            >
+              {{ coin.price_change_percentage_24h | number: '1.2-2' }}%
+            </span>
+          </div>
+        </article>
+      }
+    </section>
+  }
+
+  @if (loading) {
+    <p class="state-message">Cargando trending...</p>
+  }
+
+  @if (error) {
+    <p class="state-message error">{{ error }}</p>
+  }
+
+  @if (!loading && !error && !trendingCoins.length) {
+    <p class="state-message">
+      No se encontraron criptomonedas trending.
+    </p>
+  }
+</section>

@@ -1,0 +1,156 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.page-header p {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 1.1rem;
+  padding: 1.1rem 1.3rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  backdrop-filter: blur(18px);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+}
+
+.card.big .value {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.currency {
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+  color: #9ca3af;
+}
+
+.muted {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 0.3rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.positive {
+  color: #22c55e;
+}
+
+.negative {
+  color: #f97373;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.toolbar select,
+.toolbar input {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 0.45rem 0.9rem;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.toolbar input {
+  min-width: 220px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead {
+  background: radial-gradient(circle at top left, #22c55e33, #0ea5e933);
+}
+
+th,
+td {
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+tbody tr:hover {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.coin-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.coin-cell img {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+}
+
+.coin-name {
+  font-weight: 500;
+}
+
+.coin-symbol {
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.state-message {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.state-message.error {
+  color: #f97373;
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

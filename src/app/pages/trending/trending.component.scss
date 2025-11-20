@@ -1,0 +1,149 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.toolbar-right {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
+.toolbar-right select,
+.toolbar-right input {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 0.45rem 0.9rem;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.toolbar-right input {
+  min-width: 220px;
+}
+
+.page-header h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.page-header p {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.trend-card {
+  background: var(--card-bg);
+  border-radius: 1.1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.trend-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.coin-info img {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+}
+
+.coin-info h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.coin-info span {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.rank {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.label {
+  color: #9ca3af;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.ghost-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: transparent;
+  color: #e5e7eb;
+  padding: 0.35rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.ghost-btn:hover:not(:disabled) {
+  background: rgba(148, 163, 184, 0.2);
+  transform: translateY(-1px);
+}
+
+.ghost-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.positive {
+  color: #22c55e;
+}
+
+.negative {
+  color: #f97373;
+}
+
+.state-message {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.state-message.error {
+  color: #f97373;
+}

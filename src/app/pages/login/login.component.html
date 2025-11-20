@@ -1,0 +1,105 @@
+<section class="login-page">
+  <article class="login-card">
+    <header>
+      <p class="eyebrow">BIENVENIDO</p>
+      <h1>{{ isRegistering ? 'Creá tu cuenta' : 'Iniciá sesión' }}</h1>
+      <button type="button" class="mode-toggle" (click)="toggleMode()">
+        {{ isRegistering ? 'Ya tengo cuenta' : 'Quiero registrarme' }}
+      </button>
+    </header>
+
+    <form #loginForm="ngForm" (ngSubmit)="handleSubmit(loginForm)">
+      <label class="field">
+        <span>Nombre de usuario</span>
+        <input
+          name="username"
+          type="text"
+          placeholder="pepe"
+          required
+          minlength="2"
+          #usernameField="ngModel"
+          [(ngModel)]="formData.username"
+        />
+        @if (usernameField.invalid && (usernameField.dirty || usernameField.touched)) {
+          <small class="field-error">
+            Debe contener al menos 2 caracteres.
+          </small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Email</span>
+        <input
+          name="email"
+          type="email"
+          placeholder="pepe@correo.com"
+          required
+          email
+          #emailField="ngModel"
+          [(ngModel)]="formData.email"
+        />
+         @if (emailField.invalid && (emailField.dirty || emailField.touched)) {
+          <small class="field-error">
+            Ingresá un correo válido.
+          </small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Contraseña</span>
+        <input
+          name="password"
+          type="password"
+          placeholder="********"
+          required
+          minlength="6"
+          #passwordField="ngModel"
+          [(ngModel)]="formData.password"
+        />
+        @if (passwordField.invalid && (passwordField.dirty || passwordField.touched)) {
+          <small class="field-error">
+            La contraseña debe tener al menos 6 caracteres.
+          </small>
+        }
+      </label>
+
+      <button type="submit">
+        {{ loading ? 'Procesando...' : (isRegistering ? 'Registrar' : 'Ingresar') }}
+      </button>
+    </form>
+
+    @if (authError) {
+      <p class="error-message">{{ authError }}</p>
+    }
+
+    @if (successMessage) {
+      <p class="success-message">
+        {{ successMessage }}
+      </p>
+    }
+
+    @if (lastPayload; as payload) {
+      <div class="payload">
+        <p>Último envío</p>
+        <div class="payload-row">
+          <span>Usuario:</span>
+          <strong>{{ payload.username }}</strong>
+        </div>
+        <div class="payload-row">
+          <span>Email:</span>
+          <strong>{{ payload.email }}</strong>
+        </div>
+      </div>
+    }
+    <div class="session-state">
+      @if (user$ | async; as user) {
+        <p>Sesión iniciada como: <strong>{{ user.email }}</strong></p>
+        <button type="button" class="ghost" (click)="logout()">
+          Cerrar sesión
+        </button>
+      } @else {
+        <p>No hay sesión activa en Firebase.</p>
+      }
+    </div>
+  </article>
+</section>

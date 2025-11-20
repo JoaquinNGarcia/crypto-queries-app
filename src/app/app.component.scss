@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  color: #e5e7eb;
+  font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: radial-gradient(circle at top, #0f172a 0%, #020617 70%);
+  overflow: hidden;
+}
+
+.app-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 999px;
+  filter: blur(120px);
+  opacity: 0.6;
+}
+
+.glow-one {
+  top: -120px;
+  left: -60px;
+  background: rgba(14, 165, 233, 0.45);
+}
+
+.glow-two {
+  bottom: -180px;
+  right: -80px;
+  background: rgba(34, 197, 94, 0.35);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(148, 163, 184, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.5;
+  mask-image: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.5),
+    transparent 70%
+  );
+}
+
+app-header,
+app-footer,
+.app-main {
+  position: relative;
+  z-index: 1;
+}
+
+.app-main {
+  flex: 1;
+  padding: 1.5rem 2rem 2.5rem;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding-inline: 1rem;
+  }
+}

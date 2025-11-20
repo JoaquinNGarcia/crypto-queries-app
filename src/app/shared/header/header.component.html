@@ -1,0 +1,27 @@
+<header class="app-header">
+  <div class="brand" routerLink="/">
+    <div class="logo-circle">₿</div>
+    <div class="brand-text">
+      <span class="title">CryptoTracker </span>
+      <span class="subtitle"> by CoinGecko API</span>
+    </div>
+  </div>
+
+  <nav class="nav-links">
+    @for (link of navLinks; track link.path) {
+      <a
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: link.exact ?? false }"
+      >
+        {{ link.label }}
+      </a>
+    }
+  </nav>
+    
+  @if (isLoggedIn$ | async) {
+    <button class="login-btn" type="button" (click)="logout()">
+      Cerrar sesión
+    </button>
+  }
+</header>
