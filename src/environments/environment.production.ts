@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   coingeckoBaseUrl: 'https://api.coingecko.com/api/v3',
-  coingeckoDemoApiKey: 'CG-FVXGjSXbS33cvDM7JgZWVzhD', 
+  coingeckoDemoApiKey: '', 
   firebase: {
     apiKey: 'AIzaSyAxPMAt_jaioTujBOLlhbdYEsR_3EAiV0k',
     authDomain: 'crypto-queries-app.firebaseapp.com',
